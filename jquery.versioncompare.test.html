@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen">
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/qunit/git/qunit.js"></script>
+
+  <script src="jquery.versioncompare.js"></script>
+
+  <script>
+  $(document).ready(function(){
+    test("a basic test", function(){
+      equal(typeof $.versioncompare, 'function', "$.versioncompare should be defined.");
+      raises(function(){
+        $.versioncompare();
+      }, "$.versioncompare needs at least one parameter.");
+
+      var data = [
+          ["0", "1"]
+        , ["1", "2"]
+        , ["1", "1.1"]
+        , ["1", "1.0.1"]
+        , ["1", "1.1.1"]
+        , ["1.4.2", "1.4.10"]
+        , ["1.4.2", "1.5.1"]
+        , ["0.1", "0.1.1"]
+        , ["0.1", "0.2"]
+        , ["0.0.1", "0.2"]
+        , ["0.2", "0.10"]
+      ];
+      $.each(data, function(index, value){
+        strictEqual($.versioncompare(value[0], value[1]), -1, value.toString());
+        strictEqual($.versioncompare(value[1], value[0]), 1, value.toString());
+      });
+      strictEqual($.versioncompare("1.6"), -1, "1.6, latest"); // latest should be >= 1.6.4
+      strictEqual($.versioncompare("1", "1"), 0, "1, 1");
+      strictEqual($.versioncompare("1.1", "1.1"), 0, "1.1, 1.1");
+      strictEqual($.versioncompare("1.1.1", "1.1.1"), 0, "1.1.1, 1.1.1");
+      strictEqual($.versioncompare("1.1", "1.1.0"), 0, "1.1, 1.1.0");
+    });
+  });
+  </script>
+</head>
+<body>
+  <h1 id="qunit-header">jQuery Version Compare Plugin</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+jQuery version compare plugin
+
+Usage:
+$.versioncompare(version1[, version2 = jQuery.fn.jquery])
+
+Example:
+console.log($.versioncompare("1.4", "1.6.4"));
+
+Return:
+ 0 if two params are equal
+ 1 if the second is lower
+-1 if the second is higher
+
+Licensed under the MIT:
+http://www.opensource.org/licenses/mit-license.php
+
+Copyright (c) 2011, Nobu Funaki @zuzara
