@@ -22,7 +22,7 @@
     if ('undefined' === typeof version1) {
       throw new Error("$.versioncompare needs at least one parameter.");
     }
-    var version2 = version2 || $.fn.jquery;
+    version2 = version2 || $.fn.jquery;
     if (version1 == version2) {
       return 0;
     }
@@ -40,7 +40,7 @@
     return 0;
   };
   function normalize(version){
-    return $.map(version.split('.'), function(value, index){
+    return $.map(version.split('.'), function(value){
       return parseInt(value, 10);
     });
   }
